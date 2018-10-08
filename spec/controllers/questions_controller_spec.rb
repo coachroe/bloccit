@@ -59,16 +59,16 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe "POST create" do
     it "increases the number of Questions by 1" do
-      expect{ post :create, params: {question: {title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: false}}}.to change(Question,:count.by(1))
+      expect{ post :create, params: { question: { title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: false } } }.to change(Question,:count).by(1)
     end
 
     it "assigns the new question to @question" do
-      post :create, params: {question: my_question.attributes}
+      post :create, params: { question: { title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: false } }
       expect(assigns(:question)).to eq Question.last
     end
 
     it "redirects to the new question" do
-      post :create, params: {question: my_question.attributes}
+      post :create, params: { question: { title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: false } }
       expect(response).to redirect_to Question.last
     end
   end
@@ -106,8 +106,8 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe "DELETE destroy" do
     it "deletes the question" do
-      delete :destroy, params: {id: my_question.id}
-      count= Question.where([id: my_question.id]).size
+      delete :destroy, params: { id: my_question.id }
+      count = Question.where({id: my_question.id}).size
       expect(count).to eq 0
     end
 
